@@ -3,1024 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraBook Pro X1 - L'ordinateur portable ultime</title>
+    <title>{{CLIENT_NAME}} - Scaling.io</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --dark-bg: #0f172a;
-            --light-bg: #1e293b;
-            --text-light: #f1f5f9;
-            --text-gray: #94a3b8;
-            --accent-color: #ec4899;
-        }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
-            border-radius: 50%;
-            top: -250px;
-            right: -250px;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.2), transparent);
-            border-radius: 50%;
-            bottom: -200px;
-            left: -200px;
-            animation: pulse 4s ease-in-out infinite reverse;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            max-width: 1200px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideDown 1s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .laptop-showcase {
-            position: relative;
-            width: 600px;
-            height: 400px;
-            margin: 3rem auto;
-            perspective: 1000px;
-        }
-
-        .laptop-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            transform: rotateX(5deg) rotateY(-5deg);
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .laptop-image::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            right: 10%;
-            bottom: 10%;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-            opacity: 0.2;
-            border-radius: 5px;
-        }
-
-        .laptop-image:hover {
-            transform: rotateX(0deg) rotateY(0deg) scale(1.05);
-        }
-
-        .screen-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.4), transparent);
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--dark-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: var(--text-gray);
+            background: #ffffff;
             line-height: 1.6;
+            color: #000000;
         }
-
-        /* Specifications */
-        .specifications {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .spec-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--light-bg);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .spec-item {
-            padding: 1.5rem;
-            background: var(--dark-bg);
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s;
-        }
-
-        .spec-item:hover {
-            transform: translateX(10px);
-        }
-
-        .spec-label {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .spec-value {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--text-light);
-        }
-
-        /* Color Picker */
-        .color-selector {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .color-options {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .color-option {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 4px solid transparent;
-        }
-
-        .color-option:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px currentColor;
-        }
-
-        .color-option.active {
-            border-color: white;
-            transform: scale(1.2);
-        }
-
-        .color-silver { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
-        .color-black { background: linear-gradient(135deg, #1e293b, #0f172a); }
-        .color-gold { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
-        .color-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-
-        /* Gallery */
-        .gallery {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            height: 300px;
-            background: var(--light-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--text-gray);
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        /* Price Section */
-        .pricing {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .price-card {
-            max-width: 600px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
-        }
-
-        .price {
-            font-size: 4rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        .price-features {
-            list-style: none;
-            margin: 2rem 0;
+        
+        .header {
+            background: #000000;
+            padding: 20px 40px;
             text-align: left;
-        }
-
-        .price-features li {
-            padding: 0.5rem 0;
-            padding-left: 2rem;
+            color: white;
             position: relative;
         }
-
-        .price-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* Reviews */
-        .reviews {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .reviews-container {
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
         }
-
-        .review-card {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--primary-color);
+        
+        .header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            font-weight: 700;
+            color: white;
         }
-
-        .review-stars {
-            color: #fbbf24;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
-
-        .review-text {
-            color: var(--text-gray);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            font-style: italic;
+        
+        .section {
+            background: white;
+            padding: 30px 20px;
+            margin-bottom: 40px;
         }
-
-        .review-author {
-            font-weight: bold;
-            color: var(--text-light);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-bg);
-            padding: 3rem 2rem;
+        
+        .section h2 {
+            color: #000000;
+            font-size: 2.2em;
+            margin-bottom: 30px;
             text-align: center;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            font-weight: 600;
         }
+        
 
-        .footer-content {
-            max-width: 1400px;
+        .welcome-message {
+            text-align: center;
+            padding: 50px 20px 30px 20px;
+            max-width: 800px;
             margin: 0 auto;
         }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: var(--text-gray);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* 360 View */
-        .view-360 {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .rotation-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: var(--dark-bg);
-            padding: 3rem;
-            border-radius: 20px;
+        
+        .welcome-message {
             text-align: center;
+            padding: 50px 20px 30px 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
-
-        .rotate-button {
-            margin: 1rem;
-            padding: 1rem 2rem;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background 0.3s;
+        
+        .welcome-message h2 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0;
         }
+        
 
-        .rotate-button:hover {
-            background: var(--secondary-color);
-        }
-
-        .rotation-display {
-            width: 400px;
-            height: 300px;
-            margin: 2rem auto;
-            background: var(--light-bg);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .video-container {
             position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            background-color: black;
+            margin: 0 auto;
             overflow: hidden;
         }
-
-        .laptop-3d {
-            width: 300px;
-            height: 200px;
-            background: linear-gradient(135deg, #334155, #1e293b);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
+        
+        .player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .laptop-showcase {
-                width: 90%;
-                height: 300px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .price {
-                font-size: 2.5rem;
-            }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 3;
+            cursor: pointer;
         }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
+        
+        .calendly-container {
+            overflow: hidden;
+            background: white;
+            min-height: 700px;
         }
-
-        /* Loading Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        /* Stats Counter */
-        .stats {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
+        
+        .cta-button {
             text-align: center;
+            margin: 50px auto 0 auto;
+            padding-bottom: 50px;
+            min-height: 100px;
         }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+        
+        .cta-button a {
+            display: inline-block;
+            background: #7DEFE8;
+            color: #000000;
+            padding: 20px 45px;
+            font-size: 1.6em;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease-in;
+            box-shadow: 0 4px 15px rgba(125, 239, 232, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid #000000;
         }
-
-        .stat-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        
+        .cta-button a.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cta-button a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(125, 239, 232, 0.5);
+            background: #6BDDD6;
+        }
+        
+        .calendly-container iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+        
+    
+        .reservation-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #000000;
+            margin: 60px 0 40px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: #000000;
+            color: white;
+            margin-top: 60px;
+            font-size: 0.9em;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+            margin: 0;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            margin: 0 10px;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+            
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .reservation-title {
+                font-size: 1.8em;
+                margin: 40px 0 30px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">UltraBook Pro X1</div>
-            <ul class="nav-links">
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#features">Caractéristiques</a></li>
-                <li><a href="#specs">Spécifications</a></li>
-                <li><a href="#gallery">Galerie</a></li>
-                <li><a href="#pricing">Prix</a></li>
-                <li><a href="#reviews">Avis</a></li>
-            </ul>
+    <div class="header">
+        <div class="header-content">
+            <h1>Scaling.io</h1>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>UltraBook Pro X1</h1>
-            <p>Performance révolutionnaire. Design époustouflant.</p>
-            <div class="laptop-showcase">
-                <div class="laptop-image">
-                    <div class="screen-glow"></div>
-                    <span style="font-size: 4rem; z-index: 1;">💻</span>
-                </div>
-            </div>
-            <a href="#pricing" class="cta-button">Acheter Maintenant</a>
+    </div>
+    
+    <div class="container">
+        <div class="welcome-message">
+            <h2>Pour {{CLIENT_NAME}}</h2>
         </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number" data-target="16">0</div>
-                <div class="stat-label">Heures d'autonomie</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="32">0</div>
-                <div class="stat-label">Go de RAM</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="1">0</div>
-                <div class="stat-label">To de stockage</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="99">0</div>
-                <div class="stat-label">% satisfaction</div>
+        
+        <div class="section">
+            <div class="video-container">
+                <div id="player" class="player"></div>
+                <div id="video-overlay" class="video-overlay"></div>
             </div>
         </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="features">
-        <h2 class="section-title">Caractéristiques Principales</h2>
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">⚡</div>
-                <h3>Performance Extrême</h3>
-                <p>Processeur Intel Core i9 de dernière génération pour une puissance inégalée dans toutes vos tâches.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎨</div>
-                <h3>Écran OLED 4K</h3>
-                <p>Display OLED 15.6" avec résolution 4K et 100% DCI-P3 pour des couleurs éclatantes.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🔋</div>
-                <h3>Autonomie Longue Durée</h3>
-                <p>Jusqu'à 16 heures d'autonomie avec charge rapide 80% en 30 minutes.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎮</div>
-                <h3>GPU RTX 4080</h3>
-                <p>Carte graphique NVIDIA RTX 4080 pour gaming et création de contenu professionnel.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🔒</div>
-                <h3>Sécurité Avancée</h3>
-                <p>Lecteur d'empreintes digitales, reconnaissance faciale et TPM 2.0 intégré.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🌐</div>
-                <h3>WiFi 6E</h3>
-                <p>Connectivité ultra-rapide avec WiFi 6E et Bluetooth 5.3 pour rester connecté.</p>
-            </div>
+        
+        <div id="cta-button" class="cta-button">
+            <a id="cta-link" href="https://calendly.com/scaling-io/session-de-scaling" target="_blank">
+                RÉSERVE TA SESSION GRATUITE {{CLIENT_NAME}} >>
+            </a>
         </div>
-    </section>
-
-    <!-- 360 View -->
-    <section id="view-360" class="view-360">
-        <h2 class="section-title">Vue 360°</h2>
-        <div class="rotation-container">
-            <div class="rotation-display">
-                <div class="laptop-3d" id="laptop3d">
-                    <span style="font-size: 3rem;">💻</span>
-                </div>
-            </div>
-            <button class="rotate-button" onclick="rotateLaptop('left')">← Gauche</button>
-            <button class="rotate-button" onclick="rotateLaptop('right')">Droite →</button>
-            <button class="rotate-button" onclick="rotateLaptop('auto')">⟲ Rotation Auto</button>
-        </div>
-    </section>
-
-    <!-- Specifications -->
-    <section id="specs" class="specifications">
-        <h2 class="section-title">Spécifications Techniques</h2>
-        <div class="spec-container">
-            <div class="spec-grid">
-                <div class="spec-item">
-                    <div class="spec-label">Processeur</div>
-                    <div class="spec-value">Intel Core i9-13900H</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Mémoire RAM</div>
-                    <div class="spec-value">32 Go DDR5</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Stockage</div>
-                    <div class="spec-value">1 To NVMe SSD</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Carte Graphique</div>
-                    <div class="spec-value">NVIDIA RTX 4080</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Écran</div>
-                    <div class="spec-value">15.6" OLED 4K</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Poids</div>
-                    <div class="spec-value">1.8 kg</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Système</div>
-                    <div class="spec-value">Windows 11 Pro</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">Ports</div>
-                    <div class="spec-value">4x USB-C, HDMI 2.1</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Color Selector -->
-    <section class="color-selector">
-        <h2 class="section-title">Choisissez Votre Couleur</h2>
-        <div class="color-options">
-            <div class="color-option color-silver active" onclick="selectColor('Argent', this)" title="Argent"></div>
-            <div class="color-option color-black" onclick="selectColor('Noir', this)" title="Noir Spatial"></div>
-            <div class="color-option color-gold" onclick="selectColor('Or', this)" title="Or"></div>
-            <div class="color-option color-blue" onclick="selectColor('Bleu', this)" title="Bleu Océan"></div>
-        </div>
-        <p id="selected-color" style="text-align: center; font-size: 1.5rem; margin-top: 2rem;">
-            Couleur sélectionnée: <strong>Argent</strong>
-        </p>
-    </section>
-
-    <!-- Gallery -->
-    <section id="gallery" class="gallery">
-        <h2 class="section-title">Galerie Photo</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">📸 Vue de face</div>
-            <div class="gallery-item">📸 Vue de côté</div>
-            <div class="gallery-item">📸 Clavier rétroéclairé</div>
-            <div class="gallery-item">📸 Ports & Connectiques</div>
-            <div class="gallery-item">📸 Écran en action</div>
-            <div class="gallery-item">📸 Design ultra-fin</div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="pricing" class="pricing">
-        <h2 class="section-title">Prix & Disponibilité</h2>
-        <div class="price-card">
-            <h3>UltraBook Pro X1</h3>
-            <div class="price">2 499€</div>
-            <p>Configuration premium complète</p>
-            <ul class="price-features">
-                <li>Livraison gratuite</li>
-                <li>Garantie 3 ans</li>
-                <li>Support technique 24/7</li>
-                <li>Pack Office inclus</li>
-                <li>Sac de transport premium</li>
-                <li>Retour gratuit 30 jours</li>
-            </ul>
-            <a href="#" class="cta-button" onclick="handlePurchase(); return false;">Commander Maintenant</a>
-        </div>
-    </section>
-
-    <!-- Reviews -->
-    <section id="reviews" class="reviews">
-        <h2 class="section-title">Avis Clients</h2>
-        <div class="reviews-container">
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">
-                    "Incroyable performance! Meilleur laptop que j'ai jamais eu. L'écran OLED est absolument magnifique."
-                </p>
-                <p class="review-author">- Sophie Durand</p>
-            </div>
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">
-                    "Parfait pour le montage vidéo 4K. La batterie tient vraiment 16h en utilisation normale."
-                </p>
-                <p class="review-author">- Marc Leblanc</p>
-            </div>
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <p class="review-text">
-                    "Design élégant et performances de folie. Le meilleur investissement de l'année!"
-                </p>
-                <p class="review-author">- Julie Martin</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <h3>UltraBook Pro X1</h3>
-            <div class="social-links">
-                <a href="#" title="Facebook">📘</a>
-                <a href="#" title="Twitter">🐦</a>
-                <a href="#" title="Instagram">📷</a>
-                <a href="#" title="YouTube">📺</a>
-            </div>
-            <p>&copy; 2024 UltraBook. Tous droits réservés.</p>
-            <p style="margin-top: 1rem; color: var(--text-gray);">
-                <a href="#" style="color: var(--text-gray); text-decoration: none;">Mentions légales</a> |
-                <a href="#" style="color: var(--text-gray); text-decoration: none;">Politique de confidentialité</a> |
-                <a href="#" style="color: var(--text-gray); text-decoration: none;">Contact</a>
-            </p>
-        </div>
-    </footer>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 Scaling.io | <a href="contact.html">Contact</a> | <a href="cgv.html">CGV</a></p>
+    </div>
 
     <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+    function createYouTubePlayer(videoId) {
+        if (!document.getElementById('youtube-iframe-api')) {
+            const script = document.createElement('script');
+            script.id = 'youtube-iframe-api';
+            script.src = 'https://www.youtube.com/iframe_api';
+            document.body.appendChild(script);
+        }
+
+        let player;
+
+        window.onYouTubeIframeAPIReady = function () {
+            player = new YT.Player('player', {
+                videoId: videoId,
+                playerVars: {
+                    autoplay: 0,
+                    mute: 0,
+                    controls: 0,
+                    rel: 0,
+                    modestbranding: 1,
+                    showinfo: 0,
+                    iv_load_policy: 3,
+                    disablekb: 1,
+                    enablejsapi: 1,
+                    fs: 0,
+                    cc_load_policy: 0
+                },
+                events: {
+                    onReady: function () {
+                        setupEventListeners(player);
+                        showButtonAfter30Seconds();
+                    }
                 }
             });
-        });
-
-        // Color selector
-        function selectColor(color, element) {
-            document.querySelectorAll('.color-option').forEach(opt => {
-                opt.classList.remove('active');
-            });
-            element.classList.add('active');
-            document.getElementById('selected-color').innerHTML =
-                `Couleur sélectionnée: <strong>${color}</strong>`;
-        }
-
-        // 360 rotation
-        let currentRotation = 0;
-        let autoRotate = null;
-
-        function rotateLaptop(direction) {
-            const laptop = document.getElementById('laptop3d');
-
-            if (direction === 'auto') {
-                if (autoRotate) {
-                    clearInterval(autoRotate);
-                    autoRotate = null;
-                } else {
-                    autoRotate = setInterval(() => {
-                        currentRotation += 2;
-                        laptop.style.transform = `rotateY(${currentRotation}deg)`;
-                    }, 30);
-                }
-            } else {
-                if (autoRotate) {
-                    clearInterval(autoRotate);
-                    autoRotate = null;
-                }
-                if (direction === 'left') {
-                    currentRotation -= 45;
-                } else {
-                    currentRotation += 45;
-                }
-                laptop.style.transform = `rotateY(${currentRotation}deg)`;
-            }
-        }
-
-        // Animated counter for stats
-        function animateCounter(element, target, duration = 2000) {
-            const start = 0;
-            const increment = target / (duration / 16);
-            let current = start;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 16);
-        }
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        function setupEventListeners(player) {
+            const overlay = document.getElementById('video-overlay');
+
+            overlay.addEventListener('click', () => {
+                const state = player.getPlayerState();
+                
+                if (state === 1) {
+                    player.pauseVideo();
+                }
+                else if (state === 2 || state === -1 || state === 5 || state === 0) {
+                    player.playVideo();
                 }
             });
-        }, observerOptions);
 
-        // Observe all feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Animate stats when visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const numbers = entry.target.querySelectorAll('.stat-number');
-                    numbers.forEach(num => {
-                        const target = parseInt(num.getAttribute('data-target'));
-                        animateCounter(num, target);
-                    });
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-
-        // Purchase button handler
-        function handlePurchase() {
-            const color = document.getElementById('selected-color').querySelector('strong').textContent;
-            alert(`Merci de votre intérêt! Vous avez sélectionné l'UltraBook Pro X1 en ${color}.\n\nVous allez être redirigé vers notre page de paiement sécurisé.`);
-        }
-
-        // Laptop showcase interaction
-        const laptopImage = document.querySelector('.laptop-image');
-        if (laptopImage) {
-            laptopImage.addEventListener('mousemove', (e) => {
-                const rect = laptopImage.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-
-                laptopImage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-            });
-
-            laptopImage.addEventListener('mouseleave', () => {
-                laptopImage.style.transform = 'rotateX(5deg) rotateY(-5deg)';
-            });
-        }
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(15, 23, 42, 0.98)';
-            } else {
-                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            const iframe = document.querySelector('#player iframe');
+            if (iframe) {
+                iframe.style.pointerEvents = 'none';
             }
-        });
+        }
+        
+        function showButtonAfter30Seconds() {
+            setTimeout(function() {
+                const ctaLink = document.getElementById('cta-link');
+                ctaLink.classList.add('show');
+            }, 30000);
+        }
+    }
 
-        // Gallery item click
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', () => {
-                alert('Dans une version complète, ceci ouvrirait une lightbox avec l\'image en haute résolution.');
-            });
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        createYouTubePlayer('{{YOUTUBE_ID}}');
+    });
     </script>
 </body>
 </html>
