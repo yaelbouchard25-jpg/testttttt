@@ -60,14 +60,13 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            min-height: 700px;
-            padding: 20px;
+            min-height: 800px;
         }
         
-        /* Cal.com s'affichera ici */
-        #cal-embed {
+        .cal-iframe {
             width: 100%;
-            min-height: 700px;
+            height: 800px;
+            border: none;
         }
         
         .loading {
@@ -77,6 +76,7 @@
             justify-content: center;
             height: 700px;
             color: #667eea;
+            padding: 40px;
         }
         
         .loading-spinner {
@@ -102,6 +102,10 @@
             .header p {
                 font-size: 1rem;
             }
+            
+            .cal-iframe {
+                height: 900px;
+            }
         }
     </style>
 </head>
@@ -112,50 +116,29 @@
             <p>Tu es à un pas de transformer ton business</p>
         </div>
         
-        <!-- Bannière d'information personnalisée -->
         <div class="info-banner" id="info-banner" style="display: none;">
             <strong>✅ Tes informations sont déjà enregistrées</strong>
             <p>Choisis simplement ton créneau préféré ci-dessous</p>
         </div>
         
-        <!-- Conteneur Cal.com -->
         <div class="cal-container">
             <div class="loading" id="loading">
                 <div class="loading-spinner"></div>
                 <p>Chargement de ton calendrier personnalisé...</p>
             </div>
             
-            <!-- Cal.com s'injectera ici -->
-            <div id="cal-embed" style="display: none;"></div>
+            <!-- IFRAME CAL.COM -->
+            <iframe 
+                id="cal-iframe"
+                class="cal-iframe" 
+                style="display: none;"
+                loading="lazy">
+            </iframe>
         </div>
     </div>
 
-    <!-- 🔹 ÉTAPE 1 : Charger le script Cal.com -->
     <script>
-        (function (C, A, L) {
-            let p = function (a, ar) {
-                a.q.push(ar);
-            };
-            let d = C.document;
-            C.Cal = C.Cal || function () {
-                let cal = C.Cal;
-                let ar = arguments;
-                if (!cal.q) {
-                    cal.q = [];
-                }
-                p(cal, ar);
-            };
-            let t = d.createElement(A);
-            let s = d.getElementsByTagName(A)[0];
-            t.async = 1;
-            t.src = L;
-            s.parentNode.insertBefore(t, s);
-        })(window, "script", "https://app.cal.com/embed/embed.js");
-    </script>
-
-    <!-- 🔹 ÉTAPE 2 : Script personnalisé -->
-    <script>
-        // Fonction pour récupérer les paramètres URL
+        // 🔹 RÉCUPÉRER LES PARAMÈTRES URL
         function getURLParams() {
             const urlParams = new URLSearchParams(window.location.search);
             return {
@@ -171,7 +154,7 @@
             };
         }
 
-        // Afficher le prénom dans le titre
+        // 🔹 AFFICHER LE PRÉNOM
         function displayPrenom(prenom) {
             if (prenom) {
                 document.getElementById('prenom-display').textContent = prenom;
@@ -179,74 +162,92 @@
             }
         }
 
-        // Initialiser Cal.com
-        function initCal() {
+        // 🔹 CONSTRUIRE L'URL CAL.COM AVEC TOUS LES PARAMÈTRES
+        function buildCalURL(params) {
+            // URL de base Cal.com
+            let calURL = 'https://cal.com/scaling-acquisition/tesstttt';
+            
+            const calParams = [];
+            
+            // Nom et email (standards Cal.com)
+            if (params.prenom) {
+                calParams.push(`name=${encodeURIComponent(params.prenom)}`);
+            }
+            
+            if (params.email) {
+                calParams.push(`email=${encodeURIComponent(params.email)}`);
+            }
+            
+            // Métadonnées (toutes les autres infos)
+            if (params.source) {
+                calParams.push(`metadata[source]=${encodeURIComponent(params.source)}`);
+            }
+            
+            if (params.confirmation) {
+                calParams.push(`metadata[confirmation]=${encodeURIComponent(params.confirmation)}`);
+            }
+            
+            if (params.telephone) {
+                calParams.push(`metadata[telephone]=${encodeURIComponent(params.telephone)}`);
+            }
+            
+            if (params.ca_actuel) {
+                calParams.push(`metadata[ca_actuel]=${encodeURIComponent(params.ca_actuel)}`);
+            }
+            
+            if (params.ca_objectif) {
+                calParams.push(`metadata[ca_objectif]=${encodeURIComponent(params.ca_objectif)}`);
+            }
+            
+            if (params.motivation) {
+                // Limiter à 500 caractères pour l'URL
+                const motivationShort = params.motivation.substring(0, 500);
+                calParams.push(`metadata[motivation]=${encodeURIComponent(motivationShort)}`);
+            }
+            
+            if (params.pret) {
+                calParams.push(`metadata[pret]=${encodeURIComponent(params.pret)}`);
+            }
+            
+            // Combiner tous les paramètres
+            if (calParams.length > 0) {
+                calURL += '?' + calParams.join('&');
+            }
+            
+            return calURL;
+        }
+
+        // 🔹 INITIALISER
+        function init() {
             const params = getURLParams();
+            
+            console.log('📊 Paramètres récupérés:', params);
             
             // Afficher le prénom
             displayPrenom(params.prenom);
             
-            // Log pour debug
-            console.log('📊 Paramètres récupérés:', params);
+            // Construire l'URL Cal.com
+            const calURL = buildCalURL(params);
             
-            // 🔹 CONFIGURATION CAL.COM
-            Cal("inline", {
-                // ✅ TON LIEN CAL.COM
-                elementOrSelector: "#cal-embed",
-                calLink: "scaling-acquisition/tesstttt",
-                
-                // 🎨 Configuration visuelle
-                layout: "month_view",
-                
-                // 📝 PRÉ-REMPLISSAGE DES CHAMPS
-                config: {
-                    // Nom et email (champs standards)
-                    name: params.prenom,
-                    email: params.email,
-                    
-                    // 📦 MÉTADONNÉES (invisibles pour le client)
-                    // Toutes les autres infos du questionnaire
-                    "metadata[source]": params.source,
-                    "metadata[confirmation]": params.confirmation,
-                    "metadata[telephone]": params.telephone,
-                    "metadata[ca_actuel]": params.ca_actuel,
-                    "metadata[ca_objectif]": params.ca_objectif,
-                    "metadata[motivation]": params.motivation ? params.motivation.substring(0, 500) : '',
-                    "metadata[pret]": params.pret
-                }
-            });
+            console.log('🔗 URL Cal.com générée:', calURL);
             
-            // Masquer le loading après 1 seconde
+            // Injecter l'URL dans l'iframe
+            const iframe = document.getElementById('cal-iframe');
+            iframe.src = calURL;
+            
+            // Masquer le loading après 2 secondes
             setTimeout(() => {
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('cal-embed').style.display = 'block';
-                console.log('✅ Cal.com chargé avec succès !');
-            }, 1000);
+                iframe.style.display = 'block';
+                console.log('✅ Calendrier affiché !');
+            }, 2000);
         }
 
-        // 🔹 ÉTAPE 3 : Attendre que Cal soit prêt
-        Cal("on", {
-            action: "linkReady",
-            callback: (e) => {
-                console.log("✅ Cal.com est prêt !");
-            }
-        });
-
-        // 🔹 ÉTAPE 4 : Écouter les événements de réservation
-        Cal("on", {
-            action: "bookingSuccessful",
-            callback: (e) => {
-                console.log("🎉 Réservation confirmée !", e.detail);
-                // Tu peux rediriger vers une page de confirmation
-                // window.location.href = "/merci-reservation.html";
-            }
-        });
-
-        // 🔹 ÉTAPE 5 : Initialiser dès que le DOM est chargé
+        // Démarrer dès que le DOM est prêt
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCal);
+            document.addEventListener('DOMContentLoaded', init);
         } else {
-            initCal();
+            init();
         }
     </script>
 </body>
