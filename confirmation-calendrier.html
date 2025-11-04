@@ -143,6 +143,32 @@
             }
         }
     </style>
+    <script>
+    // 🔹 SCRIPT POUR TRANSMETTRE LES PARAMÈTRES URL À L'IFRAME
+    window.addEventListener('load', function() {
+        // Petit délai pour s'assurer que Calendly a créé l'iframe
+        setTimeout(function() {
+            // Récupère tous les paramètres de l'URL actuelle
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Trouve l'iframe du calendrier (ajuste le sélecteur si besoin)
+            const iframe = document.querySelector('iframe');
+
+            if (iframe && urlParams.toString()) {
+                // Récupère l'URL actuelle de l'iframe
+                let iframeSrc = iframe.src;
+
+                // Vérifie si l'URL a déjà des paramètres
+                const separator = iframeSrc.includes('?') ? '&' : '?';
+
+                // Ajoute les paramètres à l'URL de l'iframe
+                iframe.src = iframeSrc + separator + urlParams.toString();
+
+                console.log('✅ Paramètres transmis à l\'iframe:', urlParams.toString());
+            }
+        }, 1000);
+    });
+    </script>
 </head>
 <body>
     <div class="header">
