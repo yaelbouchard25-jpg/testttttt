@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réserve ton appel avec Valère</title>
+    <title>Réserver votre session - Scaling.io</title>
     <style>
+        /* Import Inter font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,55 +15,64 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8f8f8;
+            line-height: 1.6;
+            color: #09090a;
+        }
+
+        .header {
+            background: #ffffff;
+            padding: 15px 40px;
+            text-align: left;
+            color: #000000;
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.03) 0px 1px 20px 0px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            font-weight: 700;
+            color: #000000;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 60px 20px;
         }
 
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-            padding: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .info-banner {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .info-banner strong {
-            font-size: 1.1rem;
-        }
-
-        .cal-container {
+        .section {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 10px 0px;
+        }
+
+        .reservation-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #09090a;
+            margin: 0 0 40px 0;
+        }
+
+        .calendly-container {
             overflow: hidden;
-            min-height: 900px;
+            background: white;
+            min-height: 700px;
+            /* Centrer et limiter la largeur pour garder un format mobile */
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .cal-iframe {
@@ -94,50 +106,127 @@
             100% { transform: rotate(360deg); }
         }
 
+        .footer {
+            background: #ffffff;
+            color: #09090a;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid #e4e4e6;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .footer p {
+            font-size: 14px;
+            font-weight: 400;
+            color: #09090a;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #09090a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #db2a33;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 1.5em;
             }
 
-            .header p {
-                font-size: 1rem;
+            .section {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .reservation-title {
+                font-size: 1.8em;
+                margin: 0 0 30px 0;
+            }
+
+            .footer-links {
+                gap: 20px;
+            }
+
+            .calendly-container {
+                max-width: 100%;
             }
 
             .cal-iframe {
                 height: 1100px;
             }
-
-            .cal-container {
-                min-height: 1100px;
-            }
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="header-content">
+            <h1>Aquisition-Scaling</h1>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>🎉 Félicitations <span id="prenom-display"></span> !</h1>
-            <p>Tu es à un pas de transformer ton business</p>
-        </div>
+        <div class="section">
+            <h2 class="reservation-title">Réservez votre session de scaling</h2>
 
-        <div class="info-banner" id="info-banner" style="display: none;">
-            <strong>✅ Tes informations sont déjà enregistrées</strong>
-            <p>Choisis simplement ton créneau préféré ci-dessous</p>
-        </div>
+            <div class="calendly-container">
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement de votre calendrier personnalisé...</p>
+                </div>
 
-        <div class="cal-container">
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p>Chargement de ton calendrier personnalisé...</p>
+                <!-- IFRAME CAL.COM -->
+                <iframe
+                    id="cal-iframe"
+                    class="cal-iframe"
+                    style="display: none;"
+                    loading="lazy">
+                </iframe>
             </div>
+        </div>
+    </div>
 
-            <!-- IFRAME CAL.COM -->
-            <iframe
-                id="cal-iframe"
-                class="cal-iframe"
-                style="display: none;"
-                loading="lazy">
-            </iframe>
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p style="font-weight: 600;">Copyright © 2025 by Aquisition-Scaling LLC — NOT FOR DISTRIBUTION</p>
+                <div class="footer-links">
+                    <a href="#">Légal</a>
+                    <a href="#">CGU</a>
+                    <a href="#">CGV</a>
+                    <a href="#">Confidentialité</a>
+                </div>
+                <p style="margin-top: 16px; line-height: 1.6; text-align: justify; font-size: 12px;">Ce site ne fait pas partie du site Web de Facebook™ ou de Facebook™ Inc. De plus, ce site n'est PAS cautionné par Facebook™ de quelque manière que ce soit. FACEBOOK™ est une marque de commerce de FACEBOOK™, Inc. Les résultats présentés sur ce site ne sont pas typiques. Les formations et programmes proposés ont un but strictement éducatif. Aucun revenu, résultat ou succès n'est garanti. The Scaling Playbook LLC n'est pas un conseiller financier, fiscal ou juridique. Les informations diffusées le sont à titre informatif uniquement.</p>
+                <p style="margin-top: 16px; font-size: 12px;">Contact : <a href="mailto:contact@acquisition-scaling.fr" style="color: #09090a; text-decoration: underline;">contact@acquisition-scaling.fr</a></p>
+            </div>
         </div>
     </div>
 
@@ -158,14 +247,6 @@
             };
         }
 
-        // 🔹 AFFICHER LE PRÉNOM
-        function displayPrenom(prenom) {
-            if (prenom) {
-                document.getElementById('prenom-display').textContent = prenom;
-                document.getElementById('info-banner').style.display = 'block';
-            }
-        }
-
         // 🔹 CONSTRUIRE L'URL CAL.COM AVEC TOUS LES PARAMÈTRES
         function buildCalURL(params) {
             // URL de base Cal.com
@@ -173,7 +254,7 @@
 
             const calParams = [];
 
-            // 📱 FORCER L'AFFICHAGE MOBILE (COLUMN VIEW)
+            // 📱 FORCER L'AFFICHAGE MOBILE (COLUMN VIEW) MÊME SUR ORDINATEUR
             calParams.push('layout=column_view');
 
             // Nom et email (standards Cal.com)
@@ -229,9 +310,6 @@
             const params = getURLParams();
 
             console.log('📊 Paramètres récupérés:', params);
-
-            // Afficher le prénom
-            displayPrenom(params.prenom);
 
             // Construire l'URL Cal.com
             const calURL = buildCalURL(params);
