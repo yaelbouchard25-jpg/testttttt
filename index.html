@@ -281,16 +281,10 @@
             </div>
 
             <div id="cta-below-video" class="cta-button" style="margin-top: 40px; padding-bottom: 0;">
-                <a id="cta-link-below" href="https://tally.so/r/m6bb8O?prenom={{prenom}}&email={{email}}" target="_blank" class="show">
+                <a id="cta-link-below" href="https://tally.so/r/m6bb8O" target="_blank" class="show">
                     RÉSERVE TA SESSION GRATUITE {{CLIENT_NAME}} >>
                 </a>
             </div>
-        </div>
-        
-        <div id="cta-button" class="cta-button">
-            <a id="cta-link" href="https://formbricks.com/s/cmhhpfl432m92ad013e7zfysy?prenom={{prenom}}" target="_blank">
-                RÉSERVE TA SESSION GRATUITE {{CLIENT_NAME}} >>
-            </a>
         </div>
     </div>
     
@@ -376,6 +370,31 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         createYouTubePlayer('{{YOUTUBE_ID}}');
+
+        // Récupérer les paramètres URL (prenom et email)
+        const urlParams = new URLSearchParams(window.location.search);
+        const prenom = urlParams.get('prenom') || '';
+        const email = urlParams.get('email') || '';
+
+        // Mettre à jour le lien CTA avec les valeurs récupérées
+        const ctaLinkBelow = document.getElementById('cta-link-below');
+        if (ctaLinkBelow) {
+            const baseUrl = 'https://tally.so/r/m6bb8O';
+            const params = [];
+
+            if (prenom) {
+                params.push('prenom=' + encodeURIComponent(prenom));
+            }
+            if (email) {
+                params.push('email=' + encodeURIComponent(email));
+            }
+
+            if (params.length > 0) {
+                ctaLinkBelow.href = baseUrl + '?' + params.join('&');
+            } else {
+                ctaLinkBelow.href = baseUrl;
+            }
+        }
     });
     </script>
 </body>
